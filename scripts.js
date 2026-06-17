@@ -1,8 +1,8 @@
 // Seleciona os elementos do formulário.
-const form = document.querySelector("form")
+const form = document.querySelector("form");
 const amount = document.querySelector("#amount");
 const expense = document.querySelector("#expense");
-const category = document.querySelector("#category")
+const category = document.querySelector("#category");
 
 // Evento para capturar quando o conteúdo mudar.
 amount.oninput = () => {
@@ -27,7 +27,18 @@ function formatCurrencyBRL(value) {
   return value;
 }
 
+// Captura o evento de submit do formulário para obter os valores.
 form.onsubmit = (event) => {
-  // Impedindo de recarregar a página
-  event.preventDefault()
+  // Previne de recarregar a página.
+  event.preventDefault();
+
+  // Cria um objeto com os detalhes na nova despesa.
+  const newExpense = {
+    id: new Date().getTime(),
+    expense: expense.value,
+    category_id: category.value,
+    category_name: category.options[category.selectedIndex].text,
+    amount: amount.value,
+    created_at: new Date(),
+  };
 };
