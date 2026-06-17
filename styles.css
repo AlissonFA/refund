@@ -277,6 +277,10 @@ aside ul {
     font-size: 14px;
   }
 
+  .logo {
+    margin-left: 1.5rem;
+  }
+
   main,
   aside {
     min-width: 100%;
