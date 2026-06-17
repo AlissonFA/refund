@@ -1,5 +1,8 @@
 // Seleciona os elementos do formulário.
+const form = document.querySelector("form")
 const amount = document.querySelector("#amount");
+const expense = document.querySelector("#expense");
+const category = document.querySelector("#category")
 
 // Evento para capturar quando o conteúdo mudar.
 amount.oninput = () => {
@@ -23,3 +26,8 @@ function formatCurrencyBRL(value) {
   // Retorna o valor formatado
   return value;
 }
+
+form.onsubmit = (event) => {
+  // Impedindo de recarregar a página
+  event.preventDefault()
+};
