@@ -5,9 +5,9 @@ const expense = document.querySelector("#expense");
 const category = document.querySelector("#category");
 
 // Seleciona os elementos da lista.
-const expenseList = document.querySelector("ul")
-const expensesTotal = document.querySelector("aside header h2")
-const expensesQuantity = document.querySelector("aside header p span")
+const expenseList = document.querySelector("ul");
+const expensesTotal = document.querySelector("aside header h2");
+const expensesQuantity = document.querySelector("aside header p span");
 
 // Evento para capturar quando o conteúdo mudar.
 amount.oninput = () => {
@@ -57,49 +57,49 @@ function expenseAdd(newExpense) {
     // Cria o elemento para adicionar o item (li) na lista (ul).
     const expenseItem = document.createElement("li");
     expenseItem.classList.add("expense");
-    
+
     // Cria o ícone da categoria.
-    const expenseIcon = document.createElement("img")
-    expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`)
-    expenseIcon.setAttribute("alt", newExpense.category_name)
+    const expenseIcon = document.createElement("img");
+    expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`);
+    expenseIcon.setAttribute("alt", newExpense.category_name);
 
     // Cria a info da despesa.
-    const expenseInfo = document.createElement("div")
-    expenseInfo.classList.add("expense-info")
+    const expenseInfo = document.createElement("div");
+    expenseInfo.classList.add("expense-info");
 
     // Cria o nome da despesa.
-    const expenseName = document.createElement("strong")
-    expenseName.textContent = newExpense.expense
+    const expenseName = document.createElement("strong");
+    expenseName.textContent = newExpense.expense;
 
     // Cria a categoria da despesa.
-    const expenseCategory = document.createElement("span")
-    expenseCategory.textContent = newExpense.category_name
+    const expenseCategory = document.createElement("span");
+    expenseCategory.textContent = newExpense.category_name;
 
     // Adiciona nome e categoria na div das informações da despesa.
-    expenseInfo.append(expenseName, expenseCategory)
+    expenseInfo.append(expenseName, expenseCategory);
 
     // Cria o valor da despesa.
-    const expenseAmount = document.createElement("span")
-    expenseAmount.classList.add("expense-amount")
-    expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount.toUpperCase().replace("R$", "")}`
+    const expenseAmount = document.createElement("span");
+    expenseAmount.classList.add("expense-amount");
+    expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount.toUpperCase().replace("R$", "")}`;
 
     // Cria o ícone de remover
-    const removeIcon = document.createElement("img")
-    removeIcon.classList.add("remove-icon")
-    removeIcon.setAttribute("src", "img/remove.svg")
-    removeIcon.setAttribute("alt", "remover")
+    const removeIcon = document.createElement("img");
+    removeIcon.classList.add("remove-icon");
+    removeIcon.setAttribute("src", "img/remove.svg");
+    removeIcon.setAttribute("alt", "remover");
 
     // Adiciona as informações no item.
-    expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeIcon)
+    expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeIcon);
 
     // Adiciona o item na lista.
-    expenseList.append(expenseItem)
+    expenseList.append(expenseItem);
 
     // Limpa o formulário para adicionar um novo item.
-    formClear()
+    formClear();
 
     // Atualiza os totais
-    updateTotals()
+    updateTotals();
   } catch (error) {
     alert("Não foi possível atualizar a lista de despesas.");
     console.log(error);
@@ -110,72 +110,76 @@ function expenseAdd(newExpense) {
 function updateTotals() {
   try {
     // Recupera todos os itens (li) da lista (ul)
-    const items = expenseList.children
+    const items = expenseList.children;
 
     // Atualiza a quantidade de itens da lista.
-    expensesQuantity.textContent = `${items.length} ${items.length > 1 ? "despesas" : "despesa"}`
+    expensesQuantity.textContent = `${items.length} ${items.length > 1 ? "despesas" : "despesa"}`;
 
     // Variável para incrementar o total.
-    let total = 0
+    let total = 0;
 
     // Percorre cada item (li) da lista (ul)
-    for(let item = 0; item < items.length; item++) {
-      const itemAmount = items[item].querySelector(".expense-amount")
+    for (let item = 0; item < items.length; item++) {
+      const itemAmount = items[item].querySelector(".expense-amount");
 
       // Remover caracteres não numéricos e substitui a vírgula pelo ponto.
-      let value = itemAmount.textContent.replace(/[^\d,]/g, "").replace(",", ".")
+      let value = itemAmount.textContent
+        .replace(/[^\d,]/g, "")
+        .replace(",", ".");
 
       // Converte o valor para float.
-      value = parseFloat(value)
+      value = parseFloat(value);
 
       // Verifica se é um número válido.
-      if(isNaN(value)) {
-        return alert("Não foi possível calcular o total. O valor Não parece ser um número.")
+      if (isNaN(value)) {
+        return alert(
+          "Não foi possível calcular o total. O valor Não parece ser um número.",
+        );
       }
 
       // Incrementar o valor total.
-      total += Number(value)
+      total += Number(value);
     }
 
     // Cria a span para adicionar o R$ formatado.
-    const symbolBRL = document.createElement("small")
-    symbolBRL.textContent = "R$"
+    const symbolBRL = document.createElement("small");
+    symbolBRL.textContent = "R$";
 
     // Formata o valor e remove o R$ que será exibido pela small com um estilo customizado.
-    total = formatCurrencyBRL(total).toUpperCase().replace("R$", "")
+    total = formatCurrencyBRL(total).toUpperCase().replace("R$", "");
 
     // Limpa o conteúdo do elemento.
-    expensesTotal.innerHTML = ""
+    expensesTotal.innerHTML = "";
 
     // Adiciona o símbolo da moeda e o valor total formatado.
-    expensesTotal.append(symbolBRL, total)
+    expensesTotal.append(symbolBRL, total);
   } catch (error) {
-    console.log(error)
-    alert("Não foi possível atualizar os totais.")
+    console.log(error);
+    alert("Não foi possível atualizar os totais.");
   }
 }
 
 // Evento que captura o clique nos itens da lista.
-expenseList.addEventListener("click", function(event) {
+expenseList.addEventListener("click", function (event) {
   // Verifica se o elemento clicado é o ícone de remover.
-  if(event.target.classList.contains("remove-icon")) {
+  if (event.target.classList.contains("remove-icon")) {
     // Obtém a li pai do elemento clicado.
-    const item = event.target.closest(".expense")
+    const item = event.target.closest(".expense");
 
     // Remove item da lista.
-    item.remove()
+    item.remove();
   }
 
   // Atualiza os totais.
-  updateTotals()
-})
+  updateTotals();
+});
 
 function formClear() {
   // Limpa os inputs.
-  expense.value = ""
-  category.value = ""
-  amount.value = ""
+  expense.value = "";
+  category.value = "";
+  amount.value = "";
 
   // Coloca o foco no input de amount.
-  expense.focus()
+  expense.focus();
 }
