@@ -36,8 +36,8 @@ Os principais destaques do desenvolvimento incluem:
 
 Você pode visualizar e interagir com o projeto através dos links abaixo:
 
-* 📲 **[Acesse o layout original do projeto aqui](https://www.figma.com/community/file/1360316109107378379)**
 * 👉 **[Acesse o site funcionando aqui](https://alissonfa.github.io/refund/)**
+* 📲 **[Acesse o layout original do projeto aqui](https://www.figma.com/community/file/1360316109107378379)**
 
 **Para rodar no seu computador (Local):**
 1. Faça o download ou clone o repositório.
