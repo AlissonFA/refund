@@ -4,6 +4,9 @@ const amount = document.querySelector("#amount");
 const expense = document.querySelector("#expense");
 const category = document.querySelector("#category");
 
+// Seleciona os elementos da lista.
+const expenseList = document.querySelector("ul")
+
 // Evento para capturar quando o conteúdo mudar.
 amount.oninput = () => {
   // Obtém o valor atual do input e remove os caracteres não numéricos.
@@ -52,6 +55,17 @@ function expenseAdd(newExpense) {
     const expenseItem = document.createElement("li");
     expenseItem.classList.add("expense");
     
+    // Cria o ícone da categoria.
+    const expenseIcon = document.createElement("img")
+    expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`)
+
+    // Adiciona as informações no item.
+    expenseItem.append(expenseIcon)
+
+    // Adiciona o item na lista.
+    expenseList.append(expenseItem)
+
+    expenseIcon.setAttribute("alt", newExpense.category_name)
   } catch (error) {
     alert("Não foi possível atualizar a lista de despesas.");
     console.log(error);
